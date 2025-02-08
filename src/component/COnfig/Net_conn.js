@@ -1,43 +1,52 @@
-import cookieApiClient from "../Config/Axios"; // Ensure the path is correct
-const BASE_URL = import.meta.env.VITE_API_BASE_URL; // Define BASE_URL
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Auth Sections
 export async function IsLogin({ email, password }) {
   try {
-    const response = await cookieApiClient.post(`${BASE_URL}/auth/login`, {
-      email,
-      password,
+    const response = await fetch(`${BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
     });
 
+    if (!response.ok) {
+      throw new Error(`Login failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
     // Handle successful login
-    console.log("Login successful:", response.data);
-    // Save token or user data here if needed (e.g., localStorage.setItem('token', response.data.token))
+    console.log("Login successful:", data);
+    // You can save the token or user data here if needed
   } catch (error) {
     // Handle login failure
-    console.error(
-      "Login failed:",
-      error.response ? error.response.data : error.message
-    );
+    console.error("Login error:", error.message);
   }
 }
 
 export async function IsRegister({ username, email, password }) {
   try {
-    const response = await cookieApiClient.post(`${BASE_URL}/auth/register`, {
-      username,
-      email,
-      password,
+    const response = await fetch(`${BASE_URL}/auth/register`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, email, password }),
     });
 
+    if (!response.ok) {
+      throw new Error(`Registration failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
     // Handle successful registration
-    console.log("Registration successful:", response.data);
-    // Save user data or token here if needed
+    console.log("Registration successful:", data);
+    // You can save user data or token here if needed
   } catch (error) {
     // Handle registration failure
-    console.error(
-      "Registration failed:",
-      error.response ? error.response.data : error.message
-    );
+    console.error("Registration error:", error.message);
   }
 }
-  
