@@ -7,6 +7,7 @@ import { HomeUserPage } from "./component/pages/user/Home/HomeUserPage";
 import { MenuUserPage } from "./component/pages/user/Menu/MenuUserPage";
 import { LoginPage } from "./component/pages/Auth/Login/LoginPage";
 import { RegisterPage } from "./component/pages/Auth/Register/RegisterPage";
+import { DetailUserPage } from "./component/pages/user/Detail/DetailUserPage";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <MenuUserPage />,
+  },
+  {
+    path: "/search/detail",
+    element: <DetailUserPage />,
   },
 ]);
 createRoot(document.getElementById("root")).render(
