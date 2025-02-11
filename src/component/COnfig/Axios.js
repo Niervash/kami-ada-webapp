@@ -4,7 +4,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const cookieApiClient = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true,
+  withCredentials: false,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

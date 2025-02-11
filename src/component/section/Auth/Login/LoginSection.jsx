@@ -1,16 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
-import logo from "../../../Assets/logo.png.png";
+import logo from "../../../Assets/logo.png.png"; // Ensure the logo path is correct
+import { toast } from "react-toastify"; // Optional: for better user feedback
 import { IsLogin } from "../../../COnfig/Net_conn";
 
 export const LoginSection = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    IsLogin({ email, password });
+    try {
+      const success = await IsLogin({ email, password });
+      if (success) {
+        console.log("succses"); 
+      } else {
+        toast.error("Login failed! Please check your credentials."); 
+      }
+    } catch (error) {
+      toast.error(error.message || "An error occurred during login."); 
+    }
   };
 
   return (
@@ -36,6 +46,7 @@ export const LoginSection = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="border border-gray-300 rounded-lg w-full p-2 mb-4"
+            required // Ensure the input is required
           />
 
           <label className="block mb-2" htmlFor="password">
@@ -48,6 +59,7 @@ export const LoginSection = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="border border-gray-300 rounded-lg w-full p-2 mb-4"
+            required // Ensure the input is required
           />
 
           <button

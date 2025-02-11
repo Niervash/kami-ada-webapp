@@ -6,7 +6,7 @@ export const MenuUserPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <NavbarUser />
-      <div className="flex-grow  p-4">
+      <div className="flex-grow p-4">
         <UserMenuView />
       </div>
     </div>

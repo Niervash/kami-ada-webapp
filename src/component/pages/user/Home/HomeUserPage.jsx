@@ -7,7 +7,7 @@ export const HomeUserPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <NavbarUser />
-      <div className="flex-grow bg-red-900 p-4">
+      <div className="flex-grow bg-red-800 p-4">
         <UserJumbotronView />
       </div>
     </div>
